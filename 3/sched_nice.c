@@ -14,12 +14,12 @@
 
 #include <err.h>
 
-#define NLOOP_FOR_ESTIMATION 1000000000 UL
-#define NSECS_PER_MSEC 1000000 UL
-#define NSECS_PER_SEC 1000000000 UL
+#define NLOOP_FOR_ESTIMATION 1000000000UL
+#define NSECS_PER_MSEC 1000000UL
+#define NSECS_PER_SEC 1000000000UL
+
 static inline long diff_usec(struct timespec before, struct timespec after) {
-  return ((after.tv_sec * NSECS_PER_SEC + after.tv_nsec) -
-    (before.tv_sec * NSECS_PER_SEC + before.tv_nsec));
+  return ((after.tv_sec * NSECS_PER_SEC + after.tv_nsec) - (before.tv_sec * NSECS_PER_SEC + before.tv_nsec));
 }
 static unsigned long loops_per_msec() {
   unsigned long i;
@@ -36,8 +36,8 @@ static inline void load(unsigned long nloop) {
   for (i = 0; i < nloop; i++)
   ;
 }
-static void child_fn(int id, struct timespec * buf, int nrecord, unsigned long nloop_per_resol,
-  struct timespec start) {
+static void child_fn(int id, struct timespec * buf, int nrecord, unsigned long nloop_per_resol, struct timespec start) 
+{
   int i;
   for (i = 0; i < nrecord; i++) {
     struct timespec ts;
@@ -46,12 +46,12 @@ static void child_fn(int id, struct timespec * buf, int nrecord, unsigned long n
     buf[i] = ts;
   }
   for (i = 0; i < nrecord; i++) {
-    printf("%d\t%ld\t%d\n", id, diff_usec(start, buf[i]) / NSECS_PER_MSEC, (i +
-      1) * 100 / nrecord);
+    printf("%d\t%ld\t%d\n", id, diff_usec(start, buf[i]) / NSECS_PER_MSEC, (i + 1) * 100 / nrecord);
   }
   exit(EXIT_SUCCESS);
 }
-static void parent_fn(int nproc) {
+static void parent_fn(int nproc) 
+{
   int i;
   for (i = 0; i < nproc; i++)
     wait(NULL);
@@ -71,7 +71,7 @@ int main(int argc, char * argv[]) {
     exit(EXIT_FAILURE);
   }
   if (resol < 1) {
-    fprintf(stderr, "<resol>(%d) should be >= \n", resol);１
+    fprintf(stderr, "<resol>(%d) should be >= \n", resol);
     exit(EXIT_FAILURE);
   }
   if (total % resol) {

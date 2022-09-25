@@ -14,9 +14,10 @@
 
 #include <err.h>
 
-#define NLOOP_FOR_ESTIMATION 1000000000 UL
-#define NSECS_PER_MSEC 1000000 UL
-#define NSECS_PER_SEC 1000000000 UL
+#define NLOOP_FOR_ESTIMATION 1000000000UL
+#define NSECS_PER_MSEC 1000000UL
+#define NSECS_PER_SEC 1000000000UL
+
 static unsigned long nloop_per_resol;
 static struct timespec start;
 static inline long diff_nsec(struct timespec before, struct timespec after) {
